@@ -1,79 +1,71 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { v4 as uuid } from 'uuid';
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, editUser, setUser, clearUser } from "../../actions";
 
-import * as actions from "../../actions";
-import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
+function UserForm() {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-class UserForm extends Component {
-
-  state = {
-      ...this.returnStateObject()
-  }
-
-  returnStateObject() {
-      if(this.props.currentIndex == -1)
-          return {
-              userFirstName: '',
-              userLastName: '',
-              userNumber: '',
-          }
-        else 
-           return this.props.list[this.props.currentIndex]
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.currentIndex != this.props.currentIndex || prevProps.list.length != this.props.list.length) {
-        this.setState({ ...this.returnStateObject() })
+  const handleSubmit = () => {
+    let { id } = user;
+    if (!id) {
+      user.id = uuid()
+      dispatch(addUser(user));
+    } else if (id) {
+      dispatch(editUser(user));
+    } else {
+      alert("Enter User Details.");
     }
-}
+    clearData();
+  };
 
-  handleInputChange = (e) => {
-    this.setState({
-        [e.target.name]: e.target.value
-    })
-}
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    dispatch(setUser({ ...user, [name]: value }))
+  };
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    if (this.props.currentIndex == -1)
-            this.props.add(this.state)
-        else
-            this.props.update(this.state)
-}
+  const clearData = () => {
+    dispatch(clearUser())
+  };
 
-  render() {
-    return (
-      <>
-      <div className="container">
-      <form onSubmit={this.handleSubmit} autoComplete="off">
-            <input className = "userinput" name="userFirstName" placeholder="First Name" onChange={this.handleInputChange} value={this.state.userFirstName} />
-            < input className = "userinput" name="userLastName" placeholder="Last Name" onChange={this.handleInputChange} value={this.state.userLastName} />
-            < input className = "userinput" name="userNumber" placeholder="Contact Number" onChange={this.handleInputChange} value={this.state.userNumber} />
-            <button 
-            className="btn-1" 
-            type="submit"
-            >Submit
-            </button>
-        </form>
-      </div>
+  const { userFirstName, userLastName, userNumber, id } = user;
+  return (
+    <div className="container">
+          <input
+          className="userinput"
+            onChange={handleChange}
+            value={userFirstName}
+            type="text"
+            placeholder="First Name"
+            name="userFirstName"
+          />{" "}
+          <input
+          className="userinput"
+            onChange={handleChange}
+            value={userLastName}
+            type="text"
+            placeholder="Last Name"
+            name="userLastName"
+          />
+          <input
+            className="userinput"
+            onChange={handleChange}
+            value={userNumber}
+            type="text"
+            placeholder="Contact Number"
+            name="userNumber"
+            />
+          {id ? (
+            <button onClick={handleSubmit}>UPDATE</button>
+          ) : (
+            <button onClick={handleSubmit}>ADD</button>
+          )}
+    </div>
     
-    </>
-
-    )
-  }
-}
-const mapStateToProps = (state) =>{
-  return {
-      list: state.list,
-      currentIndex: state.currentIndex
-  }
+  );
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-      add: actions.add,
-      update: actions.update
-  }, dispatch)
-}
+export default UserForm;
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserForm);

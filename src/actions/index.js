@@ -1,29 +1,24 @@
-export const add = data => {
-    return {
-        type: 'ADD',
-        payload: data
-    }
-}
-
-export const update = data => {
-    return {
-        type: 'UPDATE',
-        payload: data
-    }
-
-}
-
-export const Delete = id => {
-    return {
-        type: 'DELETE',
-        payload: id
-    }
-
-}
-
-export const updateIndex = index => {
-    return {
-        type: 'UPDATE-INDEX',
-        payload: index
-    }
-}
+export const clearUser = () => ({
+    type: 'CLEAR_USER'
+  })
+  
+  export const setUser = (data) => ({
+    type: 'SET_USER',
+    payload: data  
+  })
+  
+  export const addUser = (data) => 
+  ({  
+    type: 'ADD_USER',  
+    payload: data  
+  });  
+  
+  export const editUser = (data) => ({  
+    type: 'EDIT_USER',  
+    payload: data  
+  }) 
+  
+  export const deleteUser = (id) => ({  
+    type: 'DELETE_USER',  
+    payload: id  
+  })

@@ -1,45 +1,36 @@
-import React from 'react'
-import * as actions from "../../actions";
-import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser, deleteUser, setUser } from "../../actions";
 
-const UserList = (props) => {
+const UserList = () => {
+  const users = useSelector(state=>state.users)
+  const dispatch = useDispatch();
 
-    const handleEdit = (index) => {
-        props.updateId(index)
-    }
+  const handleDelete = (id) => {
+    dispatch(clearUser())
+    dispatch(deleteUser(id));
+  };
 
-    const handleDelete = (index) => {
-        props.deleteUser(index)
-    }
-    return (
-        <table className="container">
-            <tbody>
-                {props.list.map((item, index) => {
-                    console.log(item)
-                    return <tr key={index}>
-                        <td>{item.userFirstName}</td>
-                        <td>{item.userLastName}</td>
-                        <td>{item.userNumber}</td>
-                        <td><button onClick={() => handleEdit(index)}>Edit</button></td>
-                        <td><button onClick={() => handleDelete(index)}>Delete</button></td>
-                    </tr>
-                })}
-            </tbody>
-        </table>
-    )
+
+  return (
+    <table className="container table">
+      <tbody>
+        {users?.map((data) => {
+          return (
+            <tr key={data.id}>
+              <td>{data.userFirstName}</td>
+              <td>{data.userLastName}</td>
+              <td>{data.userNumber}</td>
+              <td>
+                <button className="btn-1" onClick={() => dispatch(setUser(data))}>EDIT</button>{" "}
+                <button className="btn-1" onClick={() => handleDelete(data.id)}>DELETE</button>{" "}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 };
 
-const mapStateToProps = state => {
-    return {
-      list: state.list,
-    }
-  }
-
-  const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-        updateId: actions.updateIndex,
-        deleteUser: actions.Delete
-    }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UserList);
+export default UserList;
