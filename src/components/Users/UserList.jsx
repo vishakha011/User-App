@@ -16,7 +16,6 @@ const UserList = (props) => {
         <table className="container">
             <tbody>
                 {props.list.map((item, index) => {
-                    console.log(item)
                     return <tr key={index}>
                         <td>{item.userFirstName}</td>
                         <td>{item.userLastName}</td>
