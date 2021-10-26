@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from "redux-thunk";
+import { createStore } from 'redux';
+// import thunk from "redux-thunk";
 import userReducer from "./reducer";
 
 
-let store = createStore(userReducer, applyMiddleware(thunk))
+let store = createStore(userReducer)
 
 ReactDOM.render(
 <Provider store = {store}>

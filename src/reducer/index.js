@@ -7,6 +7,12 @@ const initialState = {
       userFirstName: "", 
       userLastName: "", 
       userNumber: ""
+    },
+    duplicateUser: {
+      id: 0,
+      userFirstName: '',
+      userLastName: '',
+      userNumber: ''
     }
   };
   
@@ -50,6 +56,11 @@ const initialState = {
         return {
           ...state,
           users: state.users.filter((item) => item.id !== action.payload)
+        };
+        case "DUPLICATE_USER":
+        return {
+          ...state,
+          duplicateUser: action.payload
         };
       default:
         return state;

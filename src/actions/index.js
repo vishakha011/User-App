@@ -22,3 +22,8 @@ export const clearUser = () => ({
     type: 'DELETE_USER',  
     payload: id  
   })
+
+  export const setDuplicateUser = (data) => ({  
+    type: 'DUPLICATE_USER',  
+    payload: data  
+  }) 
