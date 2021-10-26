@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import * as actions from "../../actions";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import axios from "axios";
 
 class UserForm extends Component {
 
@@ -40,19 +39,8 @@ class UserForm extends Component {
             this.props.add(this.state)
         else
             this.props.update(this.state)
-
-    this.fetchData()
   }
 
-  fetchData = () => {
-    axios.get("https://reqres.in/api/users?page=2")
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch((error) =>{
-    console.log(error);
-  })
-  }
 
   render() {
     return (
