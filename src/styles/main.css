@@ -229,3 +229,7 @@ a {
   display: inline-block;
   padding: 0.5rem 1rem;
 }
+
+.table {
+  margin-right: 10px;
+}

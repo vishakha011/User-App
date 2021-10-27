@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: require.resolve("babel-loader")
       },
@@ -31,7 +31,12 @@ module.exports = {
       {
         test: /\.png|svg|jpg|gif$/,
         use: ["file-loader"]
-      }
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
     ]
   }
 };

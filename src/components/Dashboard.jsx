@@ -1,18 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Header from "./Header";
-
 import UserList from "./Users/UserList";
-import UserForm from "./Users/UserForm";
+import * as Styled from "./Dashboard.styles"
 
 const Dashboard = () => {
+
   return (
     <>
       <Header />
-      <UserForm/>
-      <UserList/>
-      
+        <Styled.Container>
+          <Link to="/user/create">
+            <button className="btn-1">Add user</button>
+          </Link>
+        </Styled.Container>  
+        <UserList/>     
     </>
-  )
+  );
 };
+
 
 export default Dashboard;
