@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser, deleteUser, setUser } from "../../actions";
 
@@ -22,7 +23,10 @@ const UserList = () => {
               <td>{data.userLastName}</td>
               <td>{data.userNumber}</td>
               <td>
-                <button className="btn-1" onClick={() => dispatch(setUser(data))}>EDIT</button>{" "}
+                <Link to={`/user/edit/${data.id}`}>
+                  <button className="btn-1" onClick={() => dispatch(setUser(data))}>EDIT</button>{" "}
+                </Link>
+
                 <button className="btn-1" onClick={() => handleDelete(data.id)}>DELETE</button>{" "}
               </td>
             </tr>
