@@ -216,8 +216,9 @@ a {
 
 .container {
   margin: 0 auto;
-  width: 1100px;
+  width: 700px;
   padding: 4rem 6rem;
+  text-align: center;
 }
 
 .userinput {
@@ -227,9 +228,13 @@ a {
 
 .btn-1 {
   display: inline-block;
-  padding: 0.5rem 1rem;
-}
-
-.table {
-  margin-right: 10px;
+  outline: none;
+  border: none;
+  padding: 0.75rem 1.2rem;
+  text-align: center;
+  background: none;
+  color: white;
+  background-color: #c73b3b;
+  box-shadow: 0px 0px 3px 0px #c73b3b;
+  border-radius: 5px;
 }

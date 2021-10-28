@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import UserList from "./Users/UserList";
-import * as Styled from "./Dashboard.styles"
+import * as Styled from "./Dashboard.styles";
+import Button from "./Button/Button";
 
 const Dashboard = () => {
 
@@ -11,7 +12,7 @@ const Dashboard = () => {
       <Header />
         <Styled.Container>
           <Link to="/user/create">
-            <button className="btn-1">Add user</button>
+            <Button buttonText="Add User"></Button>
           </Link>
         </Styled.Container>  
         <UserList/>     
